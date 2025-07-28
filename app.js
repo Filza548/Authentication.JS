@@ -150,6 +150,9 @@ btnConnectWithfacebook && btnConnectWithfacebook.addEventListener("click", async
 
 })
 
+const postBtn = document.getElementById("postBtn")
+postBtn && postBtn
+
 
 
 

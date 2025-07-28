@@ -121,3 +121,69 @@ textarea.form-control {
 .logout-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+
+
+
+
+    .post-box {
+      /* background-color: #fff; */
+      
+      border: 2px solid #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-box h2 {
+      /* margin-bottom: 25px; */
+      text-align: center;
+      color: #fff;
+    }
+
+    .post-box label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .post-box input[type="text"],
+    .post-box textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+
+    .post-box input[type="text"]:focus,
+    .post-box textarea:focus {
+      border-color: #3b82f6;
+      outline: none;
+    }
+
+    .post-box textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .post-box button {
+      width: 100%;
+      padding: 14px;
+      background-color: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .post-box button:hover {
+      background-color: #2563eb;
+    }
