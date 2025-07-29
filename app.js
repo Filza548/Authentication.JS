@@ -14,10 +14,10 @@ async function displayUserProfile() {
             data: { user },
             error,
         } = await merge.auth.getUser();
-        console.log(user);
+        // console.log(user);
 
         if (error) throw error;
-        console.log('user data', user);
+        // console.log('user data', user);
         if (user) {
             if (document.getElementById('profile-avatar')) {
                 document.getElementById('profile-avatar').src =
@@ -25,7 +25,7 @@ async function displayUserProfile() {
                 document.getElementById('profile-name').textContent = user.user_metadata?.full_name || user.email;
                 document.getElementById('profile-email').textContent = user.email;
             }
-            console.log(window.location.pathname.includes('/Authentication.JS/index.html'));
+            // console.log(window.location.pathname.includes('/Authentication.JS/index.html'));
             // todo
             if (window.location.pathname.includes('/Authentication.JS/index.html')) {
                 window.location.href = '/Authentication.JS/post.html';
@@ -92,7 +92,7 @@ btnLogin && btnLogin.addEventListener("click", (event) => {
 
             window.location.href = '/Authentication.JS/post.html'
 
-            // window.location.href = "/authentication/login/login.html"
+            // window.location.thref = "/authentication/login/login.html"
 
             emailInput.value = ""
             passInput.value = ""
@@ -150,9 +150,90 @@ btnConnectWithfacebook && btnConnectWithfacebook.addEventListener("click", async
 
 })
 
-const postBtn = document.getElementById("postBtn")
-postBtn && postBtn
+// console.log("hellow every one kaisw ha");
 
+
+
+// add a post //
+
+const postbtn = document.getElementById("submitpost");
+const loaderOverlay = document.getElementById('loader-overlay');
+
+
+function showLoader() {
+	loaderOverlay.style.display = 'flex';
+}
+
+function hideLoader() {
+	loaderOverlay.style.display = 'none';
+}
+
+
+postbtn && postbtn.addEventListener("click", async()=>{
+//    const {data:{user}} = await merge.auth.getUser();
+   const usertitle = document.getElementById('title').value.trim()
+const userdescription = document.getElementById('description').value.trim();
+
+
+if (!usertitle || !userdescription) {
+			Swal.fire({
+				icon: 'warning',
+				title: 'Missing Fields',
+				text: 'Please enter both a title and a description.',
+				confirmButtonColor: '#125b9a',
+			});
+			return;
+		}
+
+		showLoader();
+		postbtn.disabled = true;
+
+		try {
+			const {
+				data: { user },
+				error: authError,
+			} = await merge.auth.getUser();
+
+			if (authError || !user) throw authError || new Error('User not found.');
+
+			const { data, error } = await merge.from("posts").insert({
+				user_id: user.id,
+				title: usertitle,
+				description: userdescription,
+			});
+
+            if (error) {
+				console.error(error);
+				Swal.fire({
+					icon: 'error',
+					title: 'Post Failed',
+					text: 'There was a problem creating the post.',
+					confirmButtonColor: '#125b9a',
+				});
+			} else {
+				Swal.fire({
+					icon: 'success',
+					title: 'Post Created',
+					text: 'Your post has been successfully created!',
+					timer: 1500,
+					showConfirmButton: false,
+				});
+				document.getElementById('title').value = '';
+				document.getElementById('description').value = '';
+			}
+		} catch (err) {
+			console.error(err);
+			Swal.fire({
+				icon: 'error',
+				title: 'Unexpected Error',
+				text: 'Something went wrong. Please try again.',
+				confirmButtonColor: '#125b9a',
+			});
+		} finally {
+			hideLoader();
+			postbtn.disabled = false;
+		}
+	});
 
 
 

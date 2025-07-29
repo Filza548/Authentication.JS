@@ -9,13 +9,17 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="post.css">
 
+<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	</head>
+  
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
 </head>
 
@@ -86,18 +90,31 @@
       <label for="description">Description</label>
       <textarea id="description" placeholder="Write your post description here..." required></textarea>
 
-      <button type="button" id="PostBtn" >Post</button>
+      <button type="button" id="submitpost" >Post</button>
     </form>
   </div>
+  <div class="col-12 col-sm-12 col-md-6" id="posts"></div>
   </div>
+
+
+  <div id="loader-overlay">
+			<div class="spinner-border text-primary loader-spinner" role="status">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
 
   <!-- finish post layout -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+ <!-- <script src="sweetalert2.min.js"></script> -->
 
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https:/unpkgcomionicons@552distioniconsioniconsjs"></body<script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
 
   <script src="app.js"></script>
