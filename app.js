@@ -109,32 +109,32 @@ btnLogin && btnLogin.addEventListener("click", (event) => {
 // google sign up ... working
 const connectWithGoogle = document.getElementById("btnConnectWithGoogle")
 connectWithGoogle && connectWithGoogle.addEventListener("click", async () => {
-    try{
+    try {
         const redirectTo = window.location.hostname === '127.0.0.1'
-        ? window.location.origin + 'Authentication.JS/post.html' : window.location.origin + 'Authentication.JS///Authentication.JS/post.html'
+            ? window.location.origin + 'Authentication.JS/post.html' : window.location.origin + 'Authentication.JS///Authentication.JS/post.html'
         const { data, error } = await merge.auth.signInWithOAuth({
             provider: 'google',
             options: {
                 // redirectTo: window.location.origin + '/Authentication.JS/post.html',
-				queryParams: { access_type: 'offline', prompt: 'consent' },
-				
-            // redirectTo: 'https://filza548.github.io/Authentication.JS/',
+                queryParams: { access_type: 'offline', prompt: 'consent' },
+
+                // redirectTo: 'https://filza548.github.io/Authentication.JS/',
                 redirectTo: redirectTo,
-            redirectTo: window.location.origin + '/Authentication.JS/post.html',
+                redirectTo: window.location.origin + '/Authentication.JS/post.html',
 
             },
         })
         console.log(data);
         console.log(error);
-    
-  
+
+
     }
-    catch(error){
+    catch (error) {
         console.log(error);
-        
+
     }
-      })
-    
+})
+
 
 // facebook sign up 
 const btnConnectWithfacebook = document.getElementById("btnConnectWithfacebook")
@@ -163,94 +163,138 @@ const loaderOverlay = document.getElementById('loader-overlay');
 
 
 function showLoader() {
-	loaderOverlay.style.display = 'flex';
+    loaderOverlay.style.display = 'flex';
 }
 
 function hideLoader() {
-	loaderOverlay.style.display = 'none';
+    loaderOverlay.style.display = 'none';
 }
 
 
-postbtn && postbtn.addEventListener("click", async()=>{
-//    const {data:{user}} = await merge.auth.getUser();
-   const usertitle = document.getElementById('title').value.trim()
-const userdescription = document.getElementById('description').value.trim();
- console.log(usertitle)
-            console.log(userdescription)
+postbtn && postbtn.addEventListener("click", async () => {
+    //    const {data:{user}} = await merge.auth.getUser();
+    const usertitle = document.getElementById('title').value.trim()
+    const userdescription = document.getElementById('description').value.trim();
+    console.log(usertitle)
+    console.log(userdescription)
 
-if (!usertitle || !userdescription) {
-			Swal.fire({
-				icon: 'warning',
-				title: 'Missing Fields',
-				text: 'Please enter both a title and a description.',
-				confirmButtonColor: '#125b9a',
-			});
-			return;
-		}
+    if (!usertitle || !userdescription) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please enter both a title and a description.',
+            confirmButtonColor: '#125b9a',
+        });
+        return;
+    }
 
-		showLoader();
-		postbtn.disabled = true;
+    showLoader();
+    postbtn.disabled = true;
 
-		try {
-			const {
-				data: { user },
-				error: authError,
-			} = await merge.auth.getUser();
+    try {
+        const {
+            data: { user },
+            error: authError,
+        } = await merge.auth.getUser();
 
-			if (authError || !user) throw authError || new Error('User not found.');
+        if (authError || !user) throw authError || new Error('User not found.');
 
-            console.log(user);
+        console.log(user);
 
-//           
-			const { data, error } = await merge.from("posts").insert([
-                {
-				user_id: user.id,
-				title: usertitle,
-				description: userdescription,
-                }
-			]);
+        //           
+        const { data, error } = await merge.from("posts").insert([
+            {
+                user_id: user.id,
+                title: usertitle,
+                description: userdescription,
+            }
+        ]);
 
-            
 
-            // select()
 
-            if (error) {
-				console.log(error);
-				Swal.fire({
-					icon: 'error',
-					title: 'Post Failed',
-					text: 'There was a problem creating the post.',
-					confirmButtonColor: '#125b9a',
-				});
-			} else {
-				Swal.fire({
-					icon: 'success',
-					title: 'Post Created',
-					text: 'Your post has been successfully created!',
-					timer: 1500,
-					showConfirmButton: false,
-				});
-				document.getElementById('title').value = '';
-				document.getElementById('description').value = '';
-			}
-		} catch (err) {
-			console.error(err.message);
-			Swal.fire({
-				icon: 'error',
-				title: 'Unexpected Error',
-				text: 'Something went wrong. Please try again.',
-				confirmButtonColor: '#125b9a',
-			});
-		} 
-        finally {
-			hideLoader();
-			postbtn.disabled = false;
-		}
-	});
+        // select()
+
+        if (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Post Failed',
+                text: 'There was a problem creating the post.',
+                confirmButtonColor: '#125b9a',
+            });
+        } else {
+            Swal.fire({
+                icon: 'success',
+                title: 'Post Created',
+                text: 'Your post has been successfully created!',
+                timer: 1500,
+                showConfirmButton: false,
+            });
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+        }
+    } catch (err) {
+        console.error(err.message);
+        Swal.fire({
+            icon: 'error',
+            title: 'Unexpected Error',
+            text: 'Something went wrong. Please try again.',
+            confirmButtonColor: '#125b9a',
+        });
+    }
+    finally {
+        hideLoader();
+        postbtn.disabled = false;
+    }
+});
 // add a post complted 
 
 
-// all blog post code
+// Read ALL Post
 
+if (window.location.pathname == "/Authentication.JS/allblogs.html") {
+    const current = document.getElementById("current");
+    current.style.textDecoration = "underline white";
+
+    try {
+        const readallpost = async () => {
+            const { data, error } = await merge
+                .from('posts')
+                .select()
+
+            if (data) {
+                const box = document.getElementById("container");
+console.log(box);
+
+                container.innerHTML = data.map(({ id, title, description }) => {
+                    { console.log(title, description);} 
+                    return (`<div id='${id}' class="card border border-3 border border-info" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${title}</h5>
+
+                            <p class="card-text">${description}</p>
+
+                        </div>
+                    </div>`)
+                })
+                    
+                ;} 
+
+            else {
+                console.log(error);
+
+            }
+        }
+
+        readallpost()
+
+
+    }
+
+    catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+
+}
 
 
