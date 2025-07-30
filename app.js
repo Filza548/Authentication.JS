@@ -276,7 +276,7 @@ console.log(box);
 
                         </div>
                     </div>`)
-                })
+                }).join('');
                     
                 ;} 
 
@@ -297,4 +297,56 @@ console.log(box);
 
 }
 
+// complted Read ALL Post
 
+
+// my blog code is started
+
+if (window.location.pathname == "/Authentication.JS/myblogs.html") {
+    const current = document.getElementById("current");
+    current.style.textDecoration = "underline white";
+
+    try {
+        const readallpost = async () => {
+
+            const { data: { user }, error: authError } = await merge.auth.getUser();    
+
+            const { data, error } = await merge
+                .from('posts')
+                .select()
+                .eq("user_id",user.id)
+
+            if (data) {
+                const box = document.getElementById("container");
+console.log(box);
+
+                container.innerHTML = data.map(({ id, title, description }) => {
+                    { console.log(title, description);} 
+                    return (`<div id='${id}' class="card border border-3 border border-info" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${title}</h5>
+
+                            <p class="card-text">${description}</p>
+
+                        </div>
+                    </div>`)
+                }).join('');
+                    
+                ;} 
+
+            else {
+                console.log(error);
+
+            }
+        }
+
+        readallpost()
+
+
+    }
+
+    catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+
+}

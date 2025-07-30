@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post-page</title>
+  <title>my blogs</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="post.css">
@@ -17,15 +17,11 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-
-<!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
-
-
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
     <div class="container">
-      <a class="navbar-brand" href="#">POST's</a>
+      <a class="navbar-brand" href="#">My Blogs</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
         aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,22 +31,17 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li class="nav-item ">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="post.html">Home</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link active " href="allblogs.html">All Blogs</a>
+              <a class="nav-link active " id="current" href="allblogs.html">All Blogs</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="myblogs.html">My Blogs</a>
             </li>
           </ul>
-
-        </div>
-
-        <!-- profile-section -->
-
-
-        <div class="profile-section ms-3 d-flex align-items-center">
+ <!-- profile-section -->
+          <div class="profile-section ms-3 d-flex align-items-center">
           <div class="user-profile d-flex align-items-center me-3">
             <img id="profile-avatar" src="" alt="Profile Picture" class="avatar" />
             <div class="user-details ms-2">
@@ -60,48 +51,24 @@
           </div>
           <button id="logoutBtn" class="logout-btn fontStyle">Logout</button>
         </div>
-      </div>
 
-      <!-- <div class="d-flex align-items-center bg-body-secondary rounded p-2 ms-auto">
-          <img src="blank-profile-picture-973460_960_720.webp" alt="Avatar" class="prof-avatar me-2">
-          <div>
-            <h6 class="mb-0 user-name"></h6>
-            <small class="text-muted user-email"></small>
-          </div>
-          <button class="btn btn-danger btn-sm ms-3 logoutbtn">Logout</button>
-        </div> -->
-    </div>
+        </div>
+
+       
+
+        
+      </div>
     </div>
   </nav>
 
 
+  <!-- all blogs layout -->
 
-  <!-- post layout -->
-  <div class="container mt-5 d-flex justify-content-center align-items-center">
-    <div class="post-box">
-      <h2>Create a New Post</h2>
+  <div id="container" class="d-flex justify-content-center align-items-center gap-3 p-5 flex-wrap">
+    <!-- Blog posts will be dynamically inserted here -->">
 
-      <form>
-        <label for="title">Post Title</label>
-        <input type="text" id="title" placeholder="Enter post title" required />
-
-        <label for="description">Description</label>
-        <textarea id="description" placeholder="Write your post description here..." required></textarea>
-
-        <button type="button" id="submitpost">Post</button>
-      </form>
-    </div>
-    <div class="col-12 col-sm-12 col-md-6" id="posts"></div>
   </div>
 
-
-  <div id="loader-overlay">
-    <div class="spinner-border text-primary loader-spinner" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-
-  <!-- finish post layout -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
