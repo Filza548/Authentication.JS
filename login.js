@@ -51,25 +51,38 @@ btnLogin.addEventListener("click", () => {
     user()
 
 })
-
-
+//google btn
 const connectWithGoogle = document.getElementById("btnConnectWithGoogle")
-connectWithGoogle.addEventListener("click", async () => {
-
+connectWithGoogle && connectWithGoogle.addEventListener("click", async () => {
+    try{
+        const redirectTo = window.location.hostname === '127.0.0.1'
+        ? window.location.origin + 'Authentication.JS/post.html' : window.location.origin + 'Authentication.JS///Authentication.JS/post.html'
         const { data, error } = await merge.auth.signInWithOAuth({
-      provider: 'google',
-        options: {
-             redirectTo: window.location.origin + '/authentication/post/post.html',
-					queryParams: { access_type: 'offline', prompt: 'consent' }
-        },
-    })
+            provider: 'google',
+            options: {
+                // redirectTo: window.location.origin + '/Authentication.JS/post.html',
+				queryParams: { access_type: 'offline', prompt: 'consent' },
+				
+            // redirectTo: 'https://filza548.github.io/Authentication.JS/',
+                redirectTo: redirectTo,
+            redirectTo: window.location.origin + '/Authentication.JS/post.html',
 
-    console.log(data);
-console.log(error);
-   
-})
+            },
+        })
+        console.log(data);
+        console.log(error);
+    
+  
+    }
+    catch(error){
+        console.log(error);
+        
+    }
+      })
+    
 
 
+//facebook btn
 
 const btnConnectWithfacebook = document.getElementById("btnConnectWithfacebook")
 btnConnectWithfacebook.addEventListener("click", async() =>{

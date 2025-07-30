@@ -116,8 +116,11 @@ connectWithGoogle && connectWithGoogle.addEventListener("click", async () => {
             provider: 'google',
             options: {
                 // redirectTo: window.location.origin + '/Authentication.JS/post.html',
-				// redirectTo: 'https://filza548.github.io/Authentication.JS/',
 				queryParams: { access_type: 'offline', prompt: 'consent' },
+				
+            // redirectTo: 'https://filza548.github.io/Authentication.JS/',
+                redirectTo: redirectTo,
+            redirectTo: window.location.origin + '/Authentication.JS/post.html',
 
             },
         })
@@ -150,7 +153,6 @@ btnConnectWithfacebook && btnConnectWithfacebook.addEventListener("click", async
 
 })
 
-// console.log("hellow every one kaisw ha");
 
 
 
@@ -173,7 +175,8 @@ postbtn && postbtn.addEventListener("click", async()=>{
 //    const {data:{user}} = await merge.auth.getUser();
    const usertitle = document.getElementById('title').value.trim()
 const userdescription = document.getElementById('description').value.trim();
-
+ console.log(usertitle)
+            console.log(userdescription)
 
 if (!usertitle || !userdescription) {
 			Swal.fire({
@@ -196,14 +199,23 @@ if (!usertitle || !userdescription) {
 
 			if (authError || !user) throw authError || new Error('User not found.');
 
-			const { data, error } = await merge.from("posts").insert({
+            console.log(user);
+
+//           
+			const { data, error } = await merge.from("posts").insert([
+                {
 				user_id: user.id,
 				title: usertitle,
 				description: userdescription,
-			});
+                }
+			]);
+
+            
+
+            // select()
 
             if (error) {
-				console.error(error);
+				console.log(error);
 				Swal.fire({
 					icon: 'error',
 					title: 'Post Failed',
@@ -222,20 +234,23 @@ if (!usertitle || !userdescription) {
 				document.getElementById('description').value = '';
 			}
 		} catch (err) {
-			console.error(err);
+			console.error(err.message);
 			Swal.fire({
 				icon: 'error',
 				title: 'Unexpected Error',
 				text: 'Something went wrong. Please try again.',
 				confirmButtonColor: '#125b9a',
 			});
-		} finally {
+		} 
+        finally {
 			hideLoader();
 			postbtn.disabled = false;
 		}
 	});
+// add a post complted 
 
 
+// all blog post code
 
 
 
